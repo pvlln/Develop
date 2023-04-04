@@ -1,10 +1,25 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+function renderLicenseBadge(license) {
+  var badgeText = "";
+  if(license === "MIT License"){
+    badgeText = MITLicense.badge;
+  }else if (license === "GNU GPLv3"){
+    badgeText = GNULicense.badge;
+  }else if(license === "Apache License"){
+    badgeText = apacheLicense.badge;
+  }else{
+    badgeText = 'This project is not covered under any license.'
+  }
+  return badgeText;
+}
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+function renderLicenseLink(license) {
+  var licenseLink = "";
+  
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
