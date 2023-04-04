@@ -47,10 +47,11 @@ const questions = [
     title: "Usage Information",
   },
   {
-    type: "input",
+    type: "list",
     message: "Enter your licensing agreement: ",
+    choices: ["MIT License", "GNU GPLv3", "Apache License", "No License"],
     name: "license",
-    title: "Contribution Guidelines",
+    title: "License",
   },
   {
     type: "input",
@@ -84,7 +85,6 @@ function formatData(data) {
         var licenseBadge = renderLicenseBadge(currentQ.name);
         var licenseLink = renderLicenseLink(currentQ.name);
         var licenseSection = renderLicenseSection(currentQ.name);
-
     } else if(currentQ.name === 'contents'){
         renderTableOfContents();
     }else {

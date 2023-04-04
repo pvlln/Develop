@@ -8,7 +8,25 @@ function renderLicenseLink(license) {}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+const {
+  MITLicense,
+  GNULicense,
+  apacheLicense,
+} = require('./licenses.js');
+
+function renderLicenseSection(license) {
+  var licenseSection = "";
+  if(license === "MIT License"){
+    licenseSection = MITLicense;
+  }else if (license === "GNU GPLv3"){
+    licenseSection = GNULicense;
+  }else if(license === "Apache License"){
+    licenseSection = apacheLicense;
+  }else{
+    licenseSection = 'This project is not covered under any license.'
+  }
+  return licenseSection;
+}
 
 function renderTableOfContents(){
   // Keep in mind license
