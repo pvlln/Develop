@@ -25,4 +25,4 @@ function generateMarkdown(answers) {
   return markdown;
 }
 
-module.exports = {generateMarkdown, renderLicenseBadge};
+module.exports = {generateMarkdown, renderLicenseBadge, renderLicenseLink, renderLicenseSection, renderTableOfContents};

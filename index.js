@@ -4,6 +4,9 @@ const fs = require("fs");
 const {
   generateMarkdown,
   renderLicenseBadge,
+  renderLicenseLink,
+  renderLicenseSection,
+  renderTableOfContents
 } = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
 const questions = [
@@ -13,7 +16,12 @@ const questions = [
     name: "title",
     title: "Project Title ",
   },
-  // Add table of contents q
+  {
+    type: "confirm",
+    message: "Would you like to include a table of contents?",
+    name: "contents",
+    title: "Table of Contents ",
+  },
   {
     type: "input",
     message: "Enter a description: ",
@@ -28,9 +36,21 @@ const questions = [
   },
   {
     type: "input",
+    message: "Enter your contribution guidelines: ",
+    name: "contribution",
+    title: "Contribution Guidelines",
+  },
+  {
+    type: "input",
     message: "Enter your usage information: ",
     name: "usage",
     title: "Usage Information",
+  },
+  {
+    type: "input",
+    message: "Enter your licensing agreement: ",
+    name: "license",
+    title: "Contribution Guidelines",
   },
   {
     type: "input",
@@ -44,7 +64,6 @@ const questions = [
     name: "testing",
     title: "Test Instructions",
   },
-  // Add license question
 ];
 
 // TODO: Create a function to write README file
@@ -61,10 +80,13 @@ function formatData(data) {
   for (let i = 0; i < questions.length; i++) {
     const currentQ = questions[i];
 
-    if (currentQ.name === "license") {
-        
+    if (currentQ.name === 'license') {
+        var licenseBadge = renderLicenseBadge(currentQ.name);
+        var licenseLink = renderLicenseLink(currentQ.name);
+        var licenseSection = renderLicenseSection(currentQ.name);
+
     } else if(currentQ.name === 'contents'){
-        if
+        renderTableOfContents();
     }else {
       answer = {
         title: currentQ.title,
