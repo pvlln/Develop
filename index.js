@@ -83,7 +83,9 @@ const questions = [
 
 // Function to write to readme file
 function writeToFile(data) {
+  // formats data using formatdata() fn
   const formatted = formatData(data);
+  // Creates document and prints the info generated using markdown fn
   fs.appendFile("README.md", generateMarkdown(formatted), (err) =>
     err ? console.error(err) : console.log("success")
   );
@@ -92,49 +94,64 @@ function writeToFile(data) {
 // Function to format readme file
 function formatData(data) {
   //returns an array of titles and values
+  // Initialize empty array to hold answers
   var answers = [];
+  // Iterate through questions and format accordingly
   for (let i = 0; i < questions.length; i++) {
     const currentQ = questions[i];
-    var answer = '';
-    if(currentQ.name === 'title'){
+    // Creates empty string to hold section information
+    var answer = "";
+    // Conditional that filters through different section needs
+    if (currentQ.name === "title") {
+      // Store section in answer var
+      answer = {
+        title: data[currentQ.name],
+        value: "",
+      };
+    } else if (currentQ.name === "license") {
+      // Store section in answer var
+      var licenseBadge = renderLicenseBadge(data[currentQ.name]);
+      var licenseLink = renderLicenseLink(data[currentQ.name]);
+      var licenseSection = renderLicenseSection(data[currentQ.name]);
+      answer = {
+        title: currentQ.title,
+        value: `${licenseBadge}\n${licenseSection}\n${licenseLink}`,
+      };
+    } else if (currentQ.name === "contents" && data[currentQ.name]) {
+        // Store section in answer var
         answer = {
-            title: data[currentQ.name],
-            value: '',
-        }
-    }else if (currentQ.name === 'license') {
-        var licenseBadge = renderLicenseBadge(data[currentQ.name]);
-        var licenseLink = renderLicenseLink(data[currentQ.name]);
-        var licenseSection = renderLicenseSection(data[currentQ.name]);
-        answer = {
-            title: currentQ.title,
-            value: `${licenseBadge}\n${licenseSection}\n${licenseLink}`
-        }
-    } else if(currentQ.name === 'contents' && (data[currentQ.name])){
-        answer = {
-            title: currentQ.title,
-            value: renderTableOfContents(questions),
-        }
-    }else if (currentQ.name === 'contents' && (!data[currentQ.name])) {
-        continue;
-    }else if (currentQ.name === 'github'){
-        answer = {
-            title: currentQ.title,
-            value: renderQuestionsSection(data[currentQ.name], data[questions[i+1].name]),
-        }
-    }else if (currentQ.name === 'email'){
-        continue;
-    }else {
+        title: currentQ.title,
+        value: renderTableOfContents(questions),
+      };
+    } else if (currentQ.name === "contents" && !data[currentQ.name]) {
+      // Skip if user chooses to
+      continue;
+    } else if (currentQ.name === "github") {
+      // Store section in answer var
+      answer = {
+        title: currentQ.title,
+        value: renderQuestionsSection(
+          data[currentQ.name],
+          data[questions[i + 1].name]
+        ),
+      };
+    } else if (currentQ.name === "email") {
+      continue;
+    } else {
+      // Store section in answer var for all other sections
       answer = {
         title: currentQ.title,
         value: data[currentQ.name],
       };
     }
+    // Push to answers array
     answers.push(answer);
   }
+  // Return formatted answers
   return answers;
 }
 
-// TODO: Create a function to initialize app
+// Function to initialize app
 function init() {
   inquirer.prompt(questions).then(writeToFile);
 }

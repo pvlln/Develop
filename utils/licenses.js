@@ -1,3 +1,4 @@
+// Information on different licensing options
 const MITLicense = {
   title: "MIT License",
   text: "This project is licensed under the MIT license. For more information on this licensing agreement, please go to the link below.",
