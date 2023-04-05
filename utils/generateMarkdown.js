@@ -1,15 +1,21 @@
+const {
+  MITLicense,
+  GNULicense,
+  apacheLicense,
+} = require('./licenses.js');
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   var badgeText = "";
-  if(license === "MIT License"){
-    badgeText = MITLicense.badge;
-  }else if (license === "GNU GPLv3"){
-    badgeText = GNULicense.badge;
-  }else if(license === "Apache License"){
-    badgeText = apacheLicense.badge;
+  if(license.title === "MIT License"){
+    badgeText = `![${license.title}](${MITLicense.badgeLink})`;
+  }else if (license.title === "GNU GPLv3"){
+    badgeText = `![${license.title}](${GNULicense.badgeLink})`;
+  }else if(license.title === "Apache License"){
+    badgeText = `![${license.title}](${apacheLicense.badgeLink})`;
   }else{
-    badgeText = 'This project is not covered under any license.'
+    badgeText = 'No badge available.'
   }
   return badgeText;
 }
@@ -18,16 +24,20 @@ function renderLicenseBadge(license) {
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   var licenseLink = "";
-  
+  if(license.title === "MIT License"){
+    licenseLink = `![${license.title}](${MITLicense.link})`;
+  }else if (license.title === "GNU GPLv3"){
+    licenseLink = `![${license.title}](${GNULicense.link})`;
+  }else if(license.title === "Apache License"){
+    licenseLink = `![${license.title}](${apacheLicense.link})`;
+  }else{
+    licenseLink = 'License link not available.'
+  }
+  return licenseLink;
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-const {
-  MITLicense,
-  GNULicense,
-  apacheLicense,
-} = require('./licenses.js');
 
 function renderLicenseSection(license) {
   var licenseSection = "";
@@ -44,7 +54,7 @@ function renderLicenseSection(license) {
 }
 
 function renderTableOfContents(){
-  // Keep in mind license
+  
 }
 
 // TODO: Create a function to generate markdown for README
