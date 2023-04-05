@@ -53,8 +53,12 @@ function renderLicenseSection(license) {
   return licenseSection;
 }
 
-function renderTableOfContents(){
-  
+function renderTableOfContents(questions){
+  var contents = '';
+  for (let i=0; i<questions.length; i++){
+    contents += `${i}. [${questions[i].title}](#${questions[i].title}) \n`;
+  }
+  return contents;
 }
 
 // TODO: Create a function to generate markdown for README
