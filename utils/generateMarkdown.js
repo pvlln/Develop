@@ -25,11 +25,11 @@ function renderLicenseBadge(license) {
 function renderLicenseLink(license) {
   var licenseLink = "";
   if(license === "MIT License"){
-    licenseLink = `![${license}](${MITLicense.link})`;
+    licenseLink = `[${license}](${MITLicense.link})`;
   }else if (license === "GNU GPLv3"){
-    licenseLink = `![${license}](${GNULicense.link})`;
+    licenseLink = `[${license}](${GNULicense.link})`;
   }else if(license === "Apache License"){
-    licenseLink = `![${license}](${apacheLicense.link})`;
+    licenseLink = `[${license}](${apacheLicense.link})`;
   }else{
     licenseLink = 'License link not available.'
   }
@@ -54,8 +54,8 @@ function renderLicenseSection(license) {
 }
 
 function renderTableOfContents(questions){
-  var contents;
-  for (let i=0; i<questions.length; i++){
+  var contents = '';
+  for (let i=1; i<questions.length; i++){
     contents += `${i}. [${questions[i].title}](#${questions[i].title}) \n`;
   }
   return contents;

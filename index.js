@@ -119,7 +119,7 @@ function formatData(data) {
     }else if (currentQ.name === 'github'){
         answer = {
             title: currentQ.title,
-            value: renderQuestionsSection(data[currentQ.name], data[email]),
+            value: renderQuestionsSection(data[currentQ.name], data[questions[i+1].name]),
         }
     }else if (currentQ.name === 'email'){
         continue;
