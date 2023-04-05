@@ -8,12 +8,12 @@ const {
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   var badgeText = "";
-  if(license.title === "MIT License"){
-    badgeText = `![${license.title}](${MITLicense.badgeLink})`;
-  }else if (license.title === "GNU GPLv3"){
-    badgeText = `![${license.title}](${GNULicense.badgeLink})`;
-  }else if(license.title === "Apache License"){
-    badgeText = `![${license.title}](${apacheLicense.badgeLink})`;
+  if(license === "MIT License"){
+    badgeText = `![${license}](${MITLicense.badgeLink})`;
+  }else if (license === "GNU GPLv3"){
+    badgeText = `![${license}](${GNULicense.badgeLink})`;
+  }else if(license === "Apache License"){
+    badgeText = `![${license}](${apacheLicense.badgeLink})`;
   }else{
     badgeText = 'No badge available.'
   }
@@ -24,12 +24,12 @@ function renderLicenseBadge(license) {
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   var licenseLink = "";
-  if(license.title === "MIT License"){
-    licenseLink = `![${license.title}](${MITLicense.link})`;
-  }else if (license.title === "GNU GPLv3"){
-    licenseLink = `![${license.title}](${GNULicense.link})`;
-  }else if(license.title === "Apache License"){
-    licenseLink = `![${license.title}](${apacheLicense.link})`;
+  if(license === "MIT License"){
+    licenseLink = `![${license}](${MITLicense.link})`;
+  }else if (license === "GNU GPLv3"){
+    licenseLink = `![${license}](${GNULicense.link})`;
+  }else if(license === "Apache License"){
+    licenseLink = `![${license}](${apacheLicense.link})`;
   }else{
     licenseLink = 'License link not available.'
   }
@@ -42,11 +42,11 @@ function renderLicenseLink(license) {
 function renderLicenseSection(license) {
   var licenseSection = "";
   if(license === "MIT License"){
-    licenseSection = MITLicense;
+    licenseSection = MITLicense.text;
   }else if (license === "GNU GPLv3"){
-    licenseSection = GNULicense;
+    licenseSection = GNULicense.text;
   }else if(license === "Apache License"){
-    licenseSection = apacheLicense;
+    licenseSection = apacheLicense.text;
   }else{
     licenseSection = 'This project is not covered under any license.'
   }
@@ -54,7 +54,7 @@ function renderLicenseSection(license) {
 }
 
 function renderTableOfContents(questions){
-  var contents = '';
+  var contents;
   for (let i=0; i<questions.length; i++){
     contents += `${i}. [${questions[i].title}](#${questions[i].title}) \n`;
   }

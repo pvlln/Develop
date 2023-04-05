@@ -15,13 +15,13 @@ const questions = [
     type: "input",
     message: "What is the title of your project?",
     name: "title",
-    title: "Project Title ",
+    title: "Title",
   },
   {
     type: "confirm",
     message: "Would you like to include a table of contents?",
     name: "contents",
-    title: "Table of Contents ",
+    title: "Contents",
   },
   {
     type: "input",
@@ -33,23 +33,23 @@ const questions = [
     type: "input",
     message: "Enter your installation instructions: ",
     name: "installation",
-    title: "Installation Instructions",
+    title: "Installation",
   },
   {
     type: "input",
     message: "Enter your contribution guidelines: ",
     name: "contribution",
-    title: "Contribution Guidelines",
+    title: "Contribution",
   },
   {
     type: "input",
     message: "Enter your usage information: ",
     name: "usage",
-    title: "Usage Information",
+    title: "Usage",
   },
   {
     type: "list",
-    message: "Enter your licensing agreement: ",
+    message: "Enter your licensing agreement:",
     choices: ["MIT License", "GNU GPLv3", "Apache License", "No License"],
     name: "license",
     title: "License",
@@ -58,13 +58,13 @@ const questions = [
     type: "input",
     message: "Enter your contribution guidelines: ",
     name: "contribution",
-    title: "Contribution Guidelines",
+    title: "Contribution",
   },
   {
     type: "input",
     message: "Enter your test instructions: ",
     name: "testing",
-    title: "Test Instructions",
+    title: "Testing",
   },
 ];
 
@@ -82,13 +82,22 @@ function formatData(data) {
   answers = [];
   for (let i = 0; i < questions.length; i++) {
     const currentQ = questions[i];
-
+    var answer = '';
     if (currentQ.name === 'license') {
-        var licenseBadge = renderLicenseBadge(currentQ.name);
-        var licenseLink = renderLicenseLink(currentQ.name);
-        var licenseSection = renderLicenseSection(currentQ.name);
-    } else if(currentQ.name === 'contents'){
-        renderTableOfContents();
+        var licenseBadge = renderLicenseBadge(data[currentQ.name]);
+        var licenseLink = renderLicenseLink(data[currentQ.name]);
+        var licenseSection = renderLicenseSection(data[currentQ.name]);
+        answer = {
+            title: currentQ.title,
+            value: `${licenseBadge}\n${licenseSection}\n${licenseLink}`
+        }
+    } else if(currentQ.name === 'contents' && (data[currentQ.name])){
+        answer = {
+            title: currentQ.title,
+            value: renderTableOfContents(questions),
+        }
+    }else if (currentQ.name === 'contents' && (!data[currentQ.name])) {
+        continue;
     }else {
       answer = {
         title: currentQ.title,
