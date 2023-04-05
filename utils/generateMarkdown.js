@@ -61,6 +61,13 @@ function renderTableOfContents(questions){
   return contents;
 }
 
+function renderQuestionsSection(ghuser, email){
+  var questionsSection = `My github Username: ${ghuser} \n`;
+  questionsSection += `Please find my github profile [here](https://github.com/${ghuser})\n`;
+  questionsSection += `If you have any questions, please reach me at ${email}`;
+  return questionsSection;
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
   var markdown = ""
@@ -72,4 +79,4 @@ function generateMarkdown(answers) {
   return markdown;
 }
 
-module.exports = {generateMarkdown, renderLicenseBadge, renderLicenseLink, renderLicenseSection, renderTableOfContents};
+module.exports = {generateMarkdown, renderLicenseBadge, renderLicenseLink, renderLicenseSection, renderTableOfContents, renderQuestionsSection};

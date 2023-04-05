@@ -6,7 +6,8 @@ const {
   renderLicenseBadge,
   renderLicenseLink,
   renderLicenseSection,
-  renderTableOfContents
+  renderTableOfContents,
+  renderQuestionsSection,
 } = require("./utils/generateMarkdown");
 
 // Store questions in objects inside an array
@@ -66,6 +67,18 @@ const questions = [
     name: "testing",
     title: "Testing",
   },
+  {
+    type: "input",
+    message: "Enter your github username: ",
+    name: "github",
+    title: "Questions",
+  },
+  {
+    type: "input",
+    message: "Enter your email: ",
+    name: "email",
+    title: "Questions",
+  },
 ];
 
 // Function to write to readme file
@@ -79,11 +92,16 @@ function writeToFile(data) {
 // Function to format readme file
 function formatData(data) {
   //returns an array of titles and values
-  answers = [];
+  var answers = [];
   for (let i = 0; i < questions.length; i++) {
     const currentQ = questions[i];
     var answer = '';
-    if (currentQ.name === 'license') {
+    if(currentQ.name === 'title'){
+        answer = {
+            title: data[currentQ.name],
+            value: '',
+        }
+    }else if (currentQ.name === 'license') {
         var licenseBadge = renderLicenseBadge(data[currentQ.name]);
         var licenseLink = renderLicenseLink(data[currentQ.name]);
         var licenseSection = renderLicenseSection(data[currentQ.name]);
@@ -97,6 +115,13 @@ function formatData(data) {
             value: renderTableOfContents(questions),
         }
     }else if (currentQ.name === 'contents' && (!data[currentQ.name])) {
+        continue;
+    }else if (currentQ.name === 'github'){
+        answer = {
+            title: currentQ.title,
+            value: renderQuestionsSection(data[currentQ.name], data[email]),
+        }
+    }else if (currentQ.name === 'email'){
         continue;
     }else {
       answer = {
